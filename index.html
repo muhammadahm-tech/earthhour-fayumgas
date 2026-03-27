@@ -7,7 +7,6 @@
   <link rel="icon" type="image/png" href="fayumgas_logo_180w.png" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
   <style>
-    /* ===== Reset & Base ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -43,21 +42,11 @@
       height: 60px;
       filter: brightness(0) invert(1);
     }
-    header .header-text {
-      color: #fff;
-      text-align: center;
-    }
-    header .header-text h1 {
-      font-size: 1.6rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-    header .header-text p {
-      font-size: .9rem;
-      opacity: .85;
-    }
+    header .header-text { color: #fff; text-align: center; }
+    header .header-text h1 { font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; }
+    header .header-text p  { font-size: .9rem; opacity: .85; }
 
-    /* ===== Hero Banner ===== */
+    /* ===== Hero ===== */
     .hero {
       width: 100%;
       background: linear-gradient(180deg, rgba(91,152,73,.12) 0%, transparent 100%);
@@ -75,73 +64,37 @@
       margin-bottom: 12px;
       letter-spacing: 1px;
     }
-    .hero h2 {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--blue);
-      line-height: 1.3;
-    }
+    .hero h2 { font-size: 2rem; font-weight: 900; color: var(--blue); line-height: 1.3; }
     .hero h2 span { color: var(--green); }
-    .hero p.sub {
-      color: #444;
-      font-size: 1rem;
-      margin-top: 8px;
-      max-width: 560px;
-      margin-inline: auto;
-    }
+    .hero p.sub { color: #444; font-size: 1rem; margin-top: 8px; max-width: 560px; margin-inline: auto; }
 
-    /* ===== Earth Hour Info Cards ===== */
+    /* ===== Info Cards ===== */
     .info-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      padding: 24px 20px 10px;
-      max-width: 900px;
-      width: 100%;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 16px; padding: 24px 20px 10px;
+      max-width: 900px; width: 100%;
     }
     .info-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 18px 22px;
-      flex: 1 1 220px;
-      max-width: 260px;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--green);
-      text-align: center;
+      background: #fff; border-radius: 16px; padding: 18px 22px;
+      flex: 1 1 220px; max-width: 260px;
+      box-shadow: var(--shadow); border-top: 4px solid var(--green); text-align: center;
     }
     .info-card .icon { font-size: 2rem; margin-bottom: 8px; }
     .info-card h3 { color: var(--blue); font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
-    .info-card p { color: #555; font-size: .82rem; line-height: 1.6; }
+    .info-card p  { color: #555; font-size: .82rem; line-height: 1.6; }
 
     /* ===== Main Card ===== */
     .card {
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 32px 28px;
-      max-width: 520px;
-      width: calc(100% - 32px);
-      margin-top: 24px;
+      background: #fff; border-radius: 24px; box-shadow: var(--shadow);
+      padding: 32px 28px; max-width: 520px; width: calc(100% - 32px); margin-top: 24px;
     }
-    .card h3 {
-      color: var(--blue);
-      font-size: 1.2rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    .card h3 { color: var(--blue); font-size: 1.2rem; font-weight: 800; text-align: center; margin-bottom: 20px; }
 
     /* ===== Upload Zone ===== */
     .upload-zone {
-      border: 3px dashed var(--green);
-      border-radius: 16px;
-      padding: 32px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: background .2s, border-color .2s;
-      background: var(--light-green);
-      position: relative;
+      border: 3px dashed var(--green); border-radius: 16px; padding: 32px 20px;
+      text-align: center; cursor: pointer; transition: background .2s, border-color .2s;
+      background: var(--light-green); position: relative;
     }
     .upload-zone:hover { background: #d4edcc; border-color: var(--blue); }
     .upload-zone input[type="file"] {
@@ -152,92 +105,60 @@
     .upload-zone strong { color: var(--blue); }
 
     /* ===== Canvas Preview ===== */
-    .preview-wrap {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 24px;
-    }
+    .preview-wrap { display: none; flex-direction: column; align-items: center; margin-top: 24px; }
     .preview-wrap.visible { display: flex; }
-    .preview-wrap canvas {
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      max-width: 100%;
-    }
+    .preview-wrap canvas { border-radius: 16px; box-shadow: var(--shadow); max-width: 100%; }
 
-    /* ===== Slider ===== */
-    .controls {
-      width: 100%;
-      margin-top: 16px;
-    }
-    .controls label {
-      display: block;
-      color: var(--blue);
-      font-size: .85rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .controls input[type="range"] {
-      width: 100%;
-      accent-color: var(--green);
-    }
-    .controls .row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
+    /* ===== Controls ===== */
+    .controls { width: 100%; margin-top: 16px; }
+    .controls label { display: block; color: var(--blue); font-size: .85rem; font-weight: 700; margin-bottom: 4px; }
+    .controls input[type="range"] { width: 100%; accent-color: var(--green); }
+    .controls .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
     .controls .col { flex: 1 1 140px; }
 
     /* ===== Buttons ===== */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 13px 28px;
-      border-radius: 50px;
-      font-family: 'Cairo', sans-serif;
-      font-size: .95rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      transition: transform .15s, box-shadow .15s;
-      text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 13px 28px; border-radius: 50px;
+      font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 700;
+      cursor: pointer; border: none; transition: transform .15s, box-shadow .15s; text-decoration: none;
     }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue), #3a4db5);
-      color: #fff;
-      width: 100%;
-      margin-top: 20px;
+    .btn-primary  { background: linear-gradient(135deg, var(--blue), #3a4db5); color: #fff; width: 100%; margin-top: 20px; }
+    .btn-download { background: linear-gradient(135deg, var(--green), #4a8a38); color: #fff; width: 100%; margin-top: 12px; }
+    .btn-reset    { background: #f0f0f0; color: #555; width: 100%; margin-top: 8px; font-size: .85rem; }
+
+    /* ===== Toast Notification ===== */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #222d84; color: #fff; padding: 12px 28px; border-radius: 50px;
+      font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2); transition: transform .4s ease, opacity .4s ease;
+      opacity: 0; z-index: 9999; white-space: nowrap;
     }
-    .btn-download {
-      background: linear-gradient(135deg, var(--green), #4a8a38);
-      color: #fff;
-      width: 100%;
-      margin-top: 12px;
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.success { background: #5b9849; }
+    .toast.error   { background: #c0392b; }
+
+    /* ===== Saving Overlay ===== */
+    .saving-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(34,45,132,.55); backdrop-filter: blur(4px);
+      z-index: 9998; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
     }
-    .btn-reset {
-      background: #f0f0f0;
-      color: #555;
-      width: 100%;
-      margin-top: 8px;
-      font-size: .85rem;
+    .saving-overlay.show { display: flex; }
+    .saving-overlay .spinner {
+      width: 56px; height: 56px; border: 6px solid rgba(255,255,255,.3);
+      border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite;
     }
+    .saving-overlay p { color: #fff; font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 700; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ===== Footer ===== */
-    footer {
-      margin-top: 48px;
-      text-align: center;
-      color: #666;
-      font-size: .8rem;
-      padding: 0 20px;
-    }
+    footer { margin-top: 48px; text-align: center; color: #666; font-size: .8rem; padding: 0 20px; }
     footer img { height: 36px; margin-bottom: 8px; vertical-align: middle; }
     footer .hashtags { color: var(--green); font-weight: 700; margin-top: 6px; }
 
-    /* ===== Responsive ===== */
     @media (max-width: 480px) {
       .hero h2 { font-size: 1.5rem; }
       .card { padding: 22px 16px; }
@@ -245,6 +166,15 @@
   </style>
 </head>
 <body>
+
+<!-- ===== Saving Overlay ===== -->
+<div class="saving-overlay" id="savingOverlay">
+  <div class="spinner"></div>
+  <p>⏳ جاري حفظ صورتك...</p>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
 
 <!-- ===== Header ===== -->
 <header>
@@ -285,7 +215,6 @@
 <div class="card">
   <h3>📸 أضف إطارك الآن</h3>
 
-  <!-- Upload Zone -->
   <div class="upload-zone" id="uploadZone">
     <input type="file" id="fileInput" accept="image/*" />
     <div class="upload-icon">🖼️</div>
@@ -293,7 +222,6 @@
     <p>PNG / JPG / WEBP – حتى 10 ميجا</p>
   </div>
 
-  <!-- Controls (hidden until image loaded) -->
   <div class="controls" id="controls" style="display:none;">
     <div class="row">
       <div class="col">
@@ -314,19 +242,16 @@
     <button class="btn btn-primary" onclick="applyFrame()">✅ تطبيق الإطار</button>
   </div>
 
-  <!-- Preview -->
   <div class="preview-wrap" id="previewWrap">
     <canvas id="canvas" width="1000" height="1000"></canvas>
-    <button class="btn btn-download" onclick="downloadImage()">⬇️ تحميل الصورة النهائية</button>
+    <button class="btn btn-download" onclick="downloadAndSave()">⬇️ تحميل الصورة النهائية</button>
     <button class="btn btn-reset" onclick="resetAll()">🔄 رفع صورة جديدة</button>
   </div>
 </div>
 
 <!-- ===== Footer ===== -->
 <footer>
-  <div>
-    <img src="fayumgas_logo_180w.png" alt="الفيوم للغاز" />
-  </div>
+  <div><img src="fayumgas_logo_180w.png" alt="الفيوم للغاز" /></div>
   <p>شركة الفيوم للغاز &nbsp;|&nbsp; Earth Hour 2026</p>
   <p class="hashtags">#ساعة_الأرض &nbsp; #SaveOurPlanet &nbsp; #EarthHour2026 &nbsp; #الفيوم_للغاز</p>
   <p style="margin-top:8px; color:#888;">أطفئ الأنوار لساعة واحدة &nbsp;🌙&nbsp; لنمنح كوكبنا مستقبلاً أفضل</p>
@@ -334,48 +259,51 @@
 
 <!-- ===== Script ===== -->
 <script>
-  const fileInput  = document.getElementById('fileInput');
-  const uploadZone = document.getElementById('uploadZone');
-  const controlsEl = document.getElementById('controls');
-  const previewWrap= document.getElementById('previewWrap');
-  const canvas     = document.getElementById('canvas');
-  const ctx        = canvas.getContext('2d');
+  // ===== Config =====
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx98QK_Taobys-D9smQ40WPPi7s7UoM2wRnoaCV7sgjNRFwekGcoZAI8QyBl8bE5O51/exec";
 
-  const scaleSlider = document.getElementById('scaleSlider');
-  const xSlider     = document.getElementById('xSlider');
-  const ySlider     = document.getElementById('ySlider');
+  // ===== Elements =====
+  const fileInput    = document.getElementById('fileInput');
+  const uploadZone   = document.getElementById('uploadZone');
+  const controlsEl   = document.getElementById('controls');
+  const previewWrap  = document.getElementById('previewWrap');
+  const canvas       = document.getElementById('canvas');
+  const ctx          = canvas.getContext('2d');
+  const scaleSlider  = document.getElementById('scaleSlider');
+  const xSlider      = document.getElementById('xSlider');
+  const ySlider      = document.getElementById('ySlider');
+  const savingOverlay= document.getElementById('savingOverlay');
+  const toastEl      = document.getElementById('toast');
 
   let userImg  = null;
-  let frameImg = null;
-
-  // Preload frame
-  frameImg = new Image();
+  let frameImg = new Image();
   frameImg.src = 'earthhour.png';
 
-  // File input change
+  // ===== Toast =====
+  function showToast(msg, type = 'success', duration = 3500) {
+    toastEl.textContent = msg;
+    toastEl.className = 'toast ' + type + ' show';
+    setTimeout(() => { toastEl.className = 'toast'; }, duration);
+  }
+
+  // ===== File Input =====
   fileInput.addEventListener('change', e => {
     const file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      userImg = new Image();
-      userImg.onload = () => {
-        controlsEl.style.display = 'block';
-        applyFrame();
-      };
-      userImg.src = ev.target.result;
-    };
-    reader.readAsDataURL(file);
+    loadImage(file);
   });
 
-  // Drag & drop
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.background='#d4edcc'; });
-  uploadZone.addEventListener('dragleave', () => { uploadZone.style.background=''; });
+  // ===== Drag & Drop =====
+  uploadZone.addEventListener('dragover',  e => { e.preventDefault(); uploadZone.style.background='#d4edcc'; });
+  uploadZone.addEventListener('dragleave', ()  => { uploadZone.style.background=''; });
   uploadZone.addEventListener('drop', e => {
     e.preventDefault();
-    uploadZone.style.background='';
+    uploadZone.style.background = '';
     const file = e.dataTransfer.files[0];
-    if (!file || !file.type.startsWith('image/')) return;
+    if (file && file.type.startsWith('image/')) loadImage(file);
+  });
+
+  function loadImage(file) {
     const reader = new FileReader();
     reader.onload = ev => {
       userImg = new Image();
@@ -386,27 +314,21 @@
       userImg.src = ev.target.result;
     };
     reader.readAsDataURL(file);
-  });
+  }
 
-  // Live preview on slider change
+  // ===== Live Preview =====
   [scaleSlider, xSlider, ySlider].forEach(s => s.addEventListener('input', applyFrame));
 
   function applyFrame() {
-    if (!userImg || !frameImg) return;
-
+    if (!userImg || !frameImg.complete) return;
     const SIZE = 1000;
-    canvas.width  = SIZE;
-    canvas.height = SIZE;
-
-    // Clear
+    canvas.width = canvas.height = SIZE;
     ctx.clearRect(0, 0, SIZE, SIZE);
 
-    // Draw user image (behind frame)
-    const scale  = scaleSlider.value / 100;
+    const scale   = scaleSlider.value / 100;
     const offsetX = parseInt(xSlider.value);
     const offsetY = parseInt(ySlider.value);
 
-    // Fit image to canvas keeping aspect ratio, then apply scale
     const ratio = Math.max(SIZE / userImg.width, SIZE / userImg.height);
     const w = userImg.width  * ratio * scale;
     const h = userImg.height * ratio * scale;
@@ -414,32 +336,52 @@
     const y = (SIZE - h) / 2 + offsetY;
 
     ctx.drawImage(userImg, x, y, w, h);
-
-    // Draw frame on top
     ctx.drawImage(frameImg, 0, 0, SIZE, SIZE);
 
-    // Show preview
     previewWrap.classList.add('visible');
     uploadZone.style.display = 'none';
   }
 
-  function downloadImage() {
+  // ===== Download + Auto-Save to Drive =====
+  async function downloadAndSave() {
+    // 1. تحميل الصورة للمستخدم فوراً
+    const dataURL = canvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.download = 'EarthHour2026_FayumGas.png';
-    link.href = canvas.toDataURL('image/png');
+    link.href = dataURL;
     link.click();
+
+    // 2. إرسال نسخة لـ Google Drive في الخلفية
+    savingOverlay.classList.add('show');
+    try {
+      const timestamp = new Date().toLocaleString('ar-EG', { timeZone: 'Africa/Cairo' });
+      const response  = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: dataURL, timestamp: new Date().toISOString() })
+      });
+      // no-cors لا يرجع response body — نعتبرها نجحت
+      showToast('✅ تم تحميل صورتك وحفظها بنجاح!', 'success');
+    } catch (err) {
+      // الصورة اتحملت على جهاز المستخدم حتى لو فشل الإرسال
+      showToast('⬇️ تم تحميل الصورة — تعذّر الحفظ التلقائي', 'error');
+    } finally {
+      savingOverlay.classList.remove('show');
+    }
   }
 
+  // ===== Reset =====
   function resetAll() {
     userImg = null;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     previewWrap.classList.remove('visible');
     controlsEl.style.display = 'none';
-    uploadZone.style.display = 'block';
-    fileInput.value = '';
+    uploadZone.style.display  = 'block';
+    fileInput.value   = '';
     scaleSlider.value = 100;
-    xSlider.value = 0;
-    ySlider.value = 0;
+    xSlider.value     = 0;
+    ySlider.value     = 0;
   }
 </script>
 </body>
