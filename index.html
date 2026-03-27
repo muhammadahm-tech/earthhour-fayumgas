@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ساعة الأرض 2026 – الفيوم للغاز</title>
+  <link rel="icon" type="image/png" href="fayumgas_logo_180w.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:  #222d84;
+      --green: #5b9849;
+      --light-green: #e8f5e2;
+      --white: #ffffff;
+      --shadow: 0 8px 32px rgba(34,45,132,.15);
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #e8f5e2 0%, #d0ebc8 40%, #c8e8f5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 60px;
+    }
+
+    /* ===== Header ===== */
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, var(--blue) 0%, #1a2470 50%, var(--green) 100%);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      box-shadow: 0 4px 20px rgba(34,45,132,.3);
+    }
+    header img.logo {
+      height: 60px;
+      filter: brightness(0) invert(1);
+    }
+    header .header-text {
+      color: #fff;
+      text-align: center;
+    }
+    header .header-text h1 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    header .header-text p {
+      font-size: .9rem;
+      opacity: .85;
+    }
+
+    /* ===== Hero Banner ===== */
+    .hero {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(91,152,73,.12) 0%, transparent 100%);
+      text-align: center;
+      padding: 36px 20px 20px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1.3;
+    }
+    .hero h2 span { color: var(--green); }
+    .hero p.sub {
+      color: #444;
+      font-size: 1rem;
+      margin-top: 8px;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    /* ===== Earth Hour Info Cards ===== */
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px 20px 10px;
+      max-width: 900px;
+      width: 100%;
+    }
+    .info-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 22px;
+      flex: 1 1 220px;
+      max-width: 260px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--green);
+      text-align: center;
+    }
+    .info-card .icon { font-size: 2rem; margin-bottom: 8px; }
+    .info-card h3 { color: var(--blue); font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
+    .info-card p { color: #555; font-size: .82rem; line-height: 1.6; }
+
+    /* ===== Main Card ===== */
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      max-width: 520px;
+      width: calc(100% - 32px);
+      margin-top: 24px;
+    }
+    .card h3 {
+      color: var(--blue);
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* ===== Upload Zone ===== */
+    .upload-zone {
+      border: 3px dashed var(--green);
+      border-radius: 16px;
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+      background: var(--light-green);
+      position: relative;
+    }
+    .upload-zone:hover { background: #d4edcc; border-color: var(--blue); }
+    .upload-zone input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .upload-zone .upload-icon { font-size: 3rem; color: var(--green); }
+    .upload-zone p { color: #555; font-size: .9rem; margin-top: 8px; }
+    .upload-zone strong { color: var(--blue); }
+
+    /* ===== Canvas Preview ===== */
+    .preview-wrap {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .preview-wrap.visible { display: flex; }
+    .preview-wrap canvas {
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      max-width: 100%;
+    }
+
+    /* ===== Slider ===== */
+    .controls {
+      width: 100%;
+      margin-top: 16px;
+    }
+    .controls label {
+      display: block;
+      color: var(--blue);
+      font-size: .85rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .controls input[type="range"] {
+      width: 100%;
+      accent-color: var(--green);
+    }
+    .controls .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .controls .col { flex: 1 1 140px; }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-family: 'Cairo', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: transform .15s, box-shadow .15s;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #3a4db5);
+      color: #fff;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .btn-download {
+      background: linear-gradient(135deg, var(--green), #4a8a38);
+      color: #fff;
+      width: 100%;
+      margin-top: 12px;
+    }
+    .btn-reset {
+      background: #f0f0f0;
+      color: #555;
+      width: 100%;
+      margin-top: 8px;
+      font-size: .85rem;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      margin-top: 48px;
+      text-align: center;
+      color: #666;
+      font-size: .8rem;
+      padding: 0 20px;
+    }
+    footer img { height: 36px; margin-bottom: 8px; vertical-align: middle; }
+    footer .hashtags { color: var(--green); font-weight: 700; margin-top: 6px; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 480px) {
+      .hero h2 { font-size: 1.5rem; }
+      .card { padding: 22px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <img class="logo" src="fayumgas_logo_180w.png" alt="الفيوم للغاز" />
+  <div class="header-text">
+    <h1>🌍 Earth Hour 2026</h1>
+    <p>أنا مشارك في ساعة الأرض – لنمنح كوكبنا مستقبلاً أفضل</p>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <div class="badge">#SaveOurPlanet &nbsp;|&nbsp; #EarthHour2026</div>
+  <h2>شارك في <span>ساعة الأرض</span><br/>مع الفيوم للغاز</h2>
+  <p class="sub">ارفع صورتك وأضف إطار ساعة الأرض واحفظ الصورة وشاركها مع أصدقائك!</p>
+</div>
+
+<!-- ===== Info Cards ===== -->
+<div class="info-cards">
+  <div class="info-card">
+    <div class="icon">🌱</div>
+    <h3>ما هي ساعة الأرض؟</h3>
+    <p>حدث عالمي سنوي تُطفأ فيه الأضواء لمدة ساعة كاملة للتوعية بتغير المناخ وحماية البيئة.</p>
+  </div>
+  <div class="info-card">
+    <div class="icon">💡</div>
+    <h3>لماذا نشارك؟</h3>
+    <p>كل فرد يشارك يُرسل رسالة قوية للعالم: نحن نهتم بكوكبنا ونعمل معاً من أجل مستقبل أخضر.</p>
+  </div>
+  <div class="info-card">
+    <div class="icon">🔋</div>
+    <h3>الطاقة النظيفة</h3>
+    <p>الفيوم للغاز تؤمن بأهمية الطاقة النظيفة والمستدامة لبناء مستقبل أفضل للأجيال القادمة.</p>
+  </div>
+</div>
+
+<!-- ===== Main Card ===== -->
+<div class="card">
+  <h3>📸 أضف إطارك الآن</h3>
+
+  <!-- Upload Zone -->
+  <div class="upload-zone" id="uploadZone">
+    <input type="file" id="fileInput" accept="image/*" />
+    <div class="upload-icon">🖼️</div>
+    <p><strong>اضغط هنا أو اسحب صورتك</strong></p>
+    <p>PNG / JPG / WEBP – حتى 10 ميجا</p>
+  </div>
+
+  <!-- Controls (hidden until image loaded) -->
+  <div class="controls" id="controls" style="display:none;">
+    <div class="row">
+      <div class="col">
+        <label>📐 تكبير / تصغير الصورة</label>
+        <input type="range" id="scaleSlider" min="50" max="200" value="100" />
+      </div>
+      <div class="col">
+        <label>↔️ تحريك أفقي</label>
+        <input type="range" id="xSlider" min="-300" max="300" value="0" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label>↕️ تحريك رأسي</label>
+        <input type="range" id="ySlider" min="-300" max="300" value="0" />
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="applyFrame()">✅ تطبيق الإطار</button>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-wrap" id="previewWrap">
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+    <button class="btn btn-download" onclick="downloadImage()">⬇️ تحميل الصورة النهائية</button>
+    <button class="btn btn-reset" onclick="resetAll()">🔄 رفع صورة جديدة</button>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div>
+    <img src="fayumgas_logo_180w.png" alt="الفيوم للغاز" />
+  </div>
+  <p>شركة الفيوم للغاز &nbsp;|&nbsp; Earth Hour 2026</p>
+  <p class="hashtags">#ساعة_الأرض &nbsp; #SaveOurPlanet &nbsp; #EarthHour2026 &nbsp; #الفيوم_للغاز</p>
+  <p style="margin-top:8px; color:#888;">أطفئ الأنوار لساعة واحدة &nbsp;🌙&nbsp; لنمنح كوكبنا مستقبلاً أفضل</p>
+</footer>
+
+<!-- ===== Script ===== -->
+<script>
+  const fileInput  = document.getElementById('fileInput');
+  const uploadZone = document.getElementById('uploadZone');
+  const controlsEl = document.getElementById('controls');
+  const previewWrap= document.getElementById('previewWrap');
+  const canvas     = document.getElementById('canvas');
+  const ctx        = canvas.getContext('2d');
+
+  const scaleSlider = document.getElementById('scaleSlider');
+  const xSlider     = document.getElementById('xSlider');
+  const ySlider     = document.getElementById('ySlider');
+
+  let userImg  = null;
+  let frameImg = null;
+
+  // Preload frame
+  frameImg = new Image();
+  frameImg.src = 'earthhour.png';
+
+  // File input change
+  fileInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      userImg = new Image();
+      userImg.onload = () => {
+        controlsEl.style.display = 'block';
+        applyFrame();
+      };
+      userImg.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Drag & drop
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.background='#d4edcc'; });
+  uploadZone.addEventListener('dragleave', () => { uploadZone.style.background=''; });
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.style.background='';
+    const file = e.dataTransfer.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      userImg = new Image();
+      userImg.onload = () => {
+        controlsEl.style.display = 'block';
+        applyFrame();
+      };
+      userImg.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Live preview on slider change
+  [scaleSlider, xSlider, ySlider].forEach(s => s.addEventListener('input', applyFrame));
+
+  function applyFrame() {
+    if (!userImg || !frameImg) return;
+
+    const SIZE = 1000;
+    canvas.width  = SIZE;
+    canvas.height = SIZE;
+
+    // Clear
+    ctx.clearRect(0, 0, SIZE, SIZE);
+
+    // Draw user image (behind frame)
+    const scale  = scaleSlider.value / 100;
+    const offsetX = parseInt(xSlider.value);
+    const offsetY = parseInt(ySlider.value);
+
+    // Fit image to canvas keeping aspect ratio, then apply scale
+    const ratio = Math.max(SIZE / userImg.width, SIZE / userImg.height);
+    const w = userImg.width  * ratio * scale;
+    const h = userImg.height * ratio * scale;
+    const x = (SIZE - w) / 2 + offsetX;
+    const y = (SIZE - h) / 2 + offsetY;
+
+    ctx.drawImage(userImg, x, y, w, h);
+
+    // Draw frame on top
+    ctx.drawImage(frameImg, 0, 0, SIZE, SIZE);
+
+    // Show preview
+    previewWrap.classList.add('visible');
+    uploadZone.style.display = 'none';
+  }
+
+  function downloadImage() {
+    const link = document.createElement('a');
+    link.download = 'EarthHour2026_FayumGas.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function resetAll() {
+    userImg = null;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    previewWrap.classList.remove('visible');
+    controlsEl.style.display = 'none';
+    uploadZone.style.display = 'block';
+    fileInput.value = '';
+    scaleSlider.value = 100;
+    xSlider.value = 0;
+    ySlider.value = 0;
+  }
+</script>
+</body>
+</html>
