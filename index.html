@@ -90,6 +90,17 @@
     }
     .card h3 { color: var(--blue); font-size: 1.2rem; font-weight: 800; text-align: center; margin-bottom: 20px; }
 
+    /* ===== Frame Preview ===== */
+    .frame-preview {
+      width: 100%; max-width: 400px; margin: 0 auto 24px;
+      border-radius: 16px; overflow: hidden; box-shadow: var(--shadow);
+    }
+    .frame-preview img { width: 100%; height: auto; display: block; }
+    .frame-preview-label {
+      text-align: center; color: var(--blue); font-size: .9rem; font-weight: 700;
+      margin-bottom: 8px;
+    }
+
     /* ===== Upload Zone ===== */
     .upload-zone {
       border: 3px dashed var(--green); border-radius: 16px; padding: 32px 20px;
@@ -212,10 +223,15 @@
 </div>
 
 <!-- ===== Main Card ===== -->
-<div class="card">
-  <h3>📸 أضف إطارك الآن</h3>
+  <div class="card">
+    <h3>📸 أضف إطارك الآن</h3>
 
-  <div class="upload-zone" id="uploadZone">
+    <div class="frame-preview-label">👇 هذا هو الإطار الذي سيتم استخدامه:</div>
+    <div class="frame-preview">
+      <img src="earthhour.png" alt="Earth Hour Frame" />
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
     <input type="file" id="fileInput" accept="image/*" />
     <div class="upload-icon">🖼️</div>
     <p><strong>اضغط هنا أو اسحب صورتك</strong></p>
